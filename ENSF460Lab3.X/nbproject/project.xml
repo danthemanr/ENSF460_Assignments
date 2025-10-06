@@ -3,14 +3,12 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>ENSF460Lab3</name>
-            <creation-uuid>e2795afd-06be-4ce0-b918-0a65e5848d43</creation-uuid>
+            <name>ensf460-lab3</name>
+            <creation-uuid>d6c5ffe2-0f1c-4da1-97eb-93e7a0931c93</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList>
-                <sourceRootElem>C:\Users\HPLaptop\MPLABXProjects\ENSF460Lab3.X</sourceRootElem>
-            </sourceRootList>
+            <sourceRootList/>
             <confList>
                 <confElem>
                     <name>default</name>

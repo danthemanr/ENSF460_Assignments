@@ -7,15 +7,11 @@
  * Edited copy created on September 29, 2025, 2:19 PM
  */
 
-
 #include "xc.h"
 #include "math.h"
 #include "string.h"
 
 #include "UART2.h"
-
-
-
 
 unsigned int clkval;
 
@@ -23,7 +19,7 @@ unsigned int clkval;
 
 void InitUART2(void) 
 {
-	// configures UART2 module on pins RB0 (Tx) and RB1 (Rx) on PIC24F16KA101 
+	// configures UART2 module on pins ???? (Tx) and RB1 (Rx) on PIC24F16KA101 
 	// Enables UART2 
 	//Set to Baud 4800 with 500kHz clk on PIC24F
 	
@@ -33,7 +29,7 @@ void InitUART2(void)
 
 	// configure U2MODE
     U2MODE = 0b0000000000001000;
-/*    
+    /*
 	U2MODEbits.UARTEN = 0;	// Bit15 TX, RX DISABLED, ENABLE at end of func
 	U2MODEbits.USIDL = 0;	// Bit13 Continue in Idle
 	U2MODEbits.IREN = 0;	// Bit12 No IR translation
@@ -91,16 +87,12 @@ void InitUART2(void)
 	return;
 }
 
-
-
 ///// XmitUART2: 
 ///// Displays 'DispData' on realterm 'repeatNo' of times using UART to PC. 
 ///// Adjust Baud on real term as per clock: 32kHz clock - Baud=300 // 500kHz clock - Baud=4800 
 
 void XmitUART2(char CharNum, unsigned int repeatNo)
 {	
-	
-	InitUART2();	//Initialize UART2 module and turn it on
 	while(repeatNo!=0) 
 	{
 		while(U2STAbits.UTXBF==1)	//Just loop here till the FIFO buffers have room for one more entry
@@ -110,14 +102,12 @@ void XmitUART2(char CharNum, unsigned int repeatNo)
 		U2TXREG=CharNum;	//Move Data to be displayed in UART FIFO buffer
 		repeatNo--;
 	}
-	while(U2STAbits.TRMT==0)	//Turn off UART2 upon transmission of last character; also can be Verified in interrupt subroutine U2TXInterrupt()
+	while(U2STAbits.TRMT==0)	//Wait for transmission to complete
 	{
 		//Idle();
 	}
-	U2MODEbits.UARTEN = 0;	
 	return;
 }
-
 
 void __attribute__ ((interrupt, no_auto_psv)) _U2RXInterrupt(void) {
 //	LATA = U2RXREG;
@@ -125,11 +115,7 @@ void __attribute__ ((interrupt, no_auto_psv)) _U2RXInterrupt(void) {
 }
 void __attribute__ ((interrupt, no_auto_psv)) _U2TXInterrupt(void) {
 	IFS1bits.U2TXIF = 0;
-
 }
-
-
-
 
 // Displays 16 bit number in Hex form using UART2
 void Disp2Hex(unsigned int DispData)   
@@ -158,7 +144,6 @@ void Disp2Hex(unsigned int DispData)
     DispData = 0x0000;  // Clear DispData
     return;
 }
-
 
 void Disp2Hex32(unsigned long int DispData32)   // Displays 32 bit number in Hex form using UART2
 {
@@ -208,12 +193,10 @@ void Disp2Dec(uint16_t Dec_num)
     return;
 }
 
-
 void Disp2String(char *str) //Displays String of characters
 {
     // XmitUART2(0x0A,2);  //LF
     // XmitUART2(0x0D,1);  //CR 
-    InitUART2();	//Initialize UART2 module and turn it on
     for (uint16_t i=0; i<= strlen(str); i++){
         while(U2STAbits.UTXBF==1){	//Just loop here till the FIFO buffers have room for one more entry
             // Idle();  //commented to try out serialplot app
@@ -223,9 +206,7 @@ void Disp2String(char *str) //Displays String of characters
     while(U2STAbits.TRMT==0){
         //Idle();
     }
-    U2MODEbits.UARTEN = 0; //Turn off UART2 upon transmission of last character; also can be Verified in interrupt subroutine U2TXInterrupt()
     // XmitUART2(0x0A,2);  //LF
     // XmitUART2(0x0D,1);  //CR 
-    
     return;
 }

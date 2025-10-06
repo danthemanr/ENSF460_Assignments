@@ -1,8 +1,8 @@
 /* 
- * File:   UART2.h
- * Author: rvyas
- *
- * Created on November 19, 2016, 9:22 PM
+ * File:  UART2.h
+ * Authors: Shivanshi Visvanatha, Aditi Jain, Daniel Rey
+ * 
+ * Created on September 29, 2025, 3:00 PM
  */
 
 #ifndef UART2_H
@@ -31,4 +31,3 @@ void Disp2String(char*);
 void Disp2Dec(unsigned int);
 
 #endif	/* UART2_H */
-

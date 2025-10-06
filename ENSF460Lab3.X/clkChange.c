@@ -1,3 +1,10 @@
+/*
+ * File:   clkChange.c
+ * Authors: Shivanshi Visvanatha, Aditi Jain, Daniel Rey
+ *
+ * Created on September 29, 2025, 2:57 PM
+ */
+
 #include "clkChange.h"
 
 
